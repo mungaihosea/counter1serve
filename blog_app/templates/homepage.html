@@ -6,13 +6,30 @@
 </div>
 {% for post in data.results %} 
     <div style="margin-bottom: 20px; width: 100%; text-align: center;">
-        <!-- <h4 style="text-align: left;"><img style="width: 30px;" src="https://cdn.iconscout.com/icon/free/png-256/user-1648810-1401302.png">{{post.user.username}} -->
-        
         </h4>
-        <a><img style="width: 300px;" src="{{post.img}}"></a>
+        <!-- <a><img style="width: 300px;" src="{{post.img}}"></a> -->
         <a href="{% url 'detail' post.id %}" style="margin-bottom: 5px;"><h5>{{post.title}} </h5></a>
     </div>
     <hr>
 {% endfor %}
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+      
+      
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          {% if data.previous %}
+          <li class="page-item"><a class="page-link" href="?page={{data.previous}}">Previous Page</a></li>
+          {% endif %}
 
+          {% if data.next %}
+          <li class="page-item"><a class="page-link" href="?page={{data.next}}">Next Page</a></li>
+          {% endif %}
+          
+          
+        </ul>
+      </nav>
+      
+    </ul>
+  </nav>
 {% endblock content %}

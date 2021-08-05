@@ -4,12 +4,14 @@ from django.core.files.storage import FileSystemStorage
 
 def homepage(request):
     context = {}
-    qs = requests.get("http://localhost:8000/api/list")
+    if request.GET.get('page'):
+        qs = requests.get(f"{request.GET.get('page')}")
+    else:
+        qs = requests.get("http://localhost:8000/api/list")
     data = qs.json()
     context['data'] = data
-    for x in data['results']:
-        print(x)
-        print ("************")
+    data['range'] = range(1, data['count'] + 1)
+    print(data)
     return render(request, 'homepage.html', context)
 
 def detail_view(request, id):
@@ -56,9 +58,6 @@ def register(request):
         except:
             context['error'] = 'An error occured check your details and try again'
     return render(request, 'register.html', context)
-# head = {
-#             "Authorization": f"Token {}"
-#      }
 
 def create_post(request):
     context = {}
@@ -67,18 +66,8 @@ def create_post(request):
         data["title"] = request.POST.get("title")
         data["content"] = request.POST.get("content")
 
-        myfile = request.FILES['image']
-        
-        fs = FileSystemStorage()
-        print(dir(myfile))
-        # files = {myfile.read()}
-        files = {}
-        files['img'] = myfile.read()
-        
-        # if request.FILES:
-        #     files = {"img": open(request.FILES.get("image"), 'rb')}
         headers = {"Authorization": f"Token {request.session['token']}"}
-        response = requests.post("http://localhost:8000/api/create_post", json=data, headers=headers, files = files)
+        response = requests.post("http://localhost:8000/api/create_post", json=data, headers=headers)
         try: 
             success = response.json()['success']
             context['success'] = "The post has been added successfully"

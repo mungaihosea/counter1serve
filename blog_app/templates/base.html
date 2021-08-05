@@ -11,6 +11,7 @@
 <nav style="margin-bottom: 10px;" class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'homepage' %}">Simple DRF Blog</a>
+      
         <div>
             <a href="{% url 'new_post' %}" style="color: white;" class="m-2" >Create Post</a>
             <a href="{% url 'login_user' %}" style="color: white;" class="m-2" >Login</a>
@@ -21,6 +22,11 @@
 </nav>
 <!-- content goes here -->
 <div class="container" style="padding-left: 20%;padding-right: 20%">
+    {% if request.session.token %}
+    <div class="alert alert-success">
+      you are logged in 
+    </div>
+    {% endif %}
     {% block content %} 
 
     {% endblock content %}
