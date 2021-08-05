@@ -1,0 +1,16 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class="alert alert-primary">
+    Single Post
+</div>
+<div style="margin-bottom: 20px; width: 100%; text-align: center;">
+    <h4 style="text-align: left;"><img style="width: 30px;" src="https://cdn.iconscout.com/icon/free/png-256/user-1648810-1401302.png">{{post.user.username}}
+    --<span style="font-size: smaller; color: darkslateblue;">{{post.timestamp | timesince}} ago</span>
+    </h4>
+    
+    <a href="{% url 'detail_view' post.id %}"><img style="width: 300px;" src="{{post.img.url}}"></a>
+    <a href="{% url 'detail_view' post.id %}"><h5>{{post.title}} </h5></a>
+    <p>{{post.content}}</p>
+</div>
+{% endblock content %}
