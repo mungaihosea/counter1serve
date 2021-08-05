@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length= 30)
-    img = models.ImageField()
+    img = models.ImageField(null = True, blank = True)
     timestamp = models.DateTimeField(auto_now_add= True)
     content = models.TextField()
 
@@ -20,7 +20,7 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
-
+        
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
