@@ -33,7 +33,7 @@ class ApiListView(ListAPIView):
 #returns a specific blog based on the slug provided
 @api_view(['GET'])
 #setting the permissions decorator to a blank list makes the endpoint open
-#works fot the authorization decorator as well
+
 def api_detail_view(request, slug):
     data = {}
     try:
