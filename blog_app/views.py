@@ -75,3 +75,5 @@ def create_post(request):
             context['error'] = "an error occured check your input and try again"
         
     return render(request, 'create_post.html', context)
+
+#testing comment
