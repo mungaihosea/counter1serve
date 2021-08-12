@@ -76,4 +76,4 @@ def create_post(request):
         
     return render(request, 'create_post.html', context)
 
-#testing comment
+#removed the previous comment
